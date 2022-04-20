@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SegmentChangeEventDetail } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { TabsService } from './../../SERVICES/tabs.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,13 @@ import { SegmentChangeEventDetail } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  tabsStatus$: Observable<boolean>
+
+  constructor(private tabsService: TabsService) { }
 
   ngOnInit() {
+    this.tabsStatus$ = this.tabsService.showTabs$
+    console.log('status des tabs:', this.tabsStatus$)
   }
 
   segmentChanged(event: CustomEvent<SegmentChangeEventDetail>){

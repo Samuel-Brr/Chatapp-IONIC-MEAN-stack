@@ -1,5 +1,7 @@
+
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+  <ng-container *ngIf="tabsStatus$|async">
+  <ion-tab-bar slot="bottom" id=“myTabBar”>
     <ion-tab-button tab="camera">
       <ion-icon name="camera"></ion-icon>
       <ion-label>camera</ion-label>
@@ -17,5 +19,7 @@
       <ion-label>calls</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
+</ng-container>
 </ion-tabs>
+
 

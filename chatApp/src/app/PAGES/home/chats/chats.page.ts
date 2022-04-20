@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { BehaviorSubject, tap, Observable, catchError, throwError } from 'rxjs';
 import { Chat } from 'src/app/MODELS/chat.model';
 import { ApiService } from 'src/app/SERVICES/api.service';
@@ -13,7 +15,7 @@ export class ChatsPage implements OnInit {
   private subject = new BehaviorSubject<Chat[]>([]);
   chatArr$: Observable<Chat[]> = this.subject.asObservable()
 
-  constructor(private api: ApiService ) { }
+  constructor(private api: ApiService, private navCtrl: NavController ) { }
 
   ngOnInit() {
     this.getAllChats()
@@ -34,6 +36,16 @@ export class ChatsPage implements OnInit {
       )
       .subscribe();
     console.log(this.chatArr$)
+  }
+
+  selectChat(chat){
+    let navigationExtra: NavigationExtras ={
+      state:{
+        chat: chat
+      }
+    }
+    console.log('clicked !')
+    this.navCtrl.navigateForward('/home/tabs/chats/message', navigationExtra)
   }
 
 }

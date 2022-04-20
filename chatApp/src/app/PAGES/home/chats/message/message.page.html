@@ -1,3 +1,5 @@
+<ng-container *ngIf="(chatData$|async) as chatData">
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -5,7 +7,7 @@
     </ion-buttons>
     <ion-title>
         <ion-label>
-          <p><strong>User name</strong></p>
+          <p><strong> {{ chatData.name }} </strong></p>
         </ion-label>
     </ion-title>
     <ion-buttons slot="primary">
@@ -20,8 +22,13 @@
 </ion-header>
 
 <ion-content>
-    <ion-item style="margin:5px 5px 5px auto; width: fit-content; border-radius: 6px; background-color: rgba(151, 242, 186, 0.832);">
-      <ion-label style="margin: 0%;">Awesome Label</ion-label>
+    <ion-item
+      *ngFor="let message of chatData.messages; let i=index"
+      style="margin:5px 5px 5px auto; width: fit-content; border-radius: 6px; background-color: rgba(151, 242, 186, 0.832);"
+    >
+      <ion-label style="margin: 0%;"> {{ message.message }} </ion-label>
       <ion-note slot="end" style="margin-inline: 6px" > {{ getDate() | date: 'shortTime'  }} </ion-note>
     </ion-item>
 </ion-content>
+
+</ng-container>
