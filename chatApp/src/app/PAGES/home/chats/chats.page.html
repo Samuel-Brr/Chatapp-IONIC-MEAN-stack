@@ -6,15 +6,21 @@
 
 <ion-content>
   <ion-list>
-    <ion-item detail routerLink="123">
-      <ion-avatar slot="start">
-        <img src="https://randomuser.me/api/portraits/women/60.jpg" alt="une image" />
-      </ion-avatar>
-      <ion-label>
-        <p><strong>User name</strong></p>
-        <p>Conversation last text</p>
-      </ion-label>
-      <ion-note slot="end">Date</ion-note>
-    </ion-item>
+
+    <ng-container *ngIf="(chatArr$|async) as chatArr">
+
+      <ion-item detail routerLink="123" *ngFor="let chat of chatArr">
+        <ion-avatar slot="start">
+          <img src="https://randomuser.me/api/portraits/women/60.jpg" alt="une image" />
+        </ion-avatar>
+        <ion-label>
+          <p><strong> {{ chat.name }} </strong></p>
+          <p>Conversation last text</p>
+        </ion-label>
+        <ion-note slot="end">Date</ion-note>
+      </ion-item>
+
+    </ng-container>
+
   </ion-list>
 </ion-content>

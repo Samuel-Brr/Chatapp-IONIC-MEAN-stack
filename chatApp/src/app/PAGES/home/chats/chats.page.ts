@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { BehaviorSubject, tap, Observable, catchError, throwError } from 'rxjs';
+import { Chat } from 'src/app/MODELS/chat.model';
 import { ApiService } from 'src/app/SERVICES/api.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { ApiService } from 'src/app/SERVICES/api.service';
   styleUrls: ['./chats.page.scss'],
 })
 export class ChatsPage implements OnInit {
+
+  private subject = new BehaviorSubject<Chat[]>([]);
+  chatArr$: Observable<Chat[]> = this.subject.asObservable()
 
   constructor(private api: ApiService ) { }
 
@@ -18,9 +22,18 @@ export class ChatsPage implements OnInit {
   getAllChats(){
     this.api.getChats()
       .pipe(
-        tap(chats => console.log(chats))
+        catchError(err => {
+          return throwError(() => {
+            new Error(err)
+            alert("Unable to get list of chats")
+          })
+        }),
+        tap(chats => {
+          this.subject.next(chats)
+        })
       )
-      .subscribe()
+      .subscribe();
+    console.log(this.chatArr$)
   }
 
 }
