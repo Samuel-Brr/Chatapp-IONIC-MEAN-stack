@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+import { ApiService } from 'src/app/SERVICES/api.service';
 
 @Component({
   selector: 'app-chats',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatsPage implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService ) { }
 
   ngOnInit() {
+    this.getAllChats()
+  }
+
+  getAllChats(){
+    this.api.getChats()
+      .pipe(
+        tap(chats => console.log(chats))
+      )
+      .subscribe()
   }
 
 }
