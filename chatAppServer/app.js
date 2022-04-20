@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const chatsRouter = require('./routes/chats.routes')
+const messagesRouter = require('./routes/message.routes')
 const mongoose = require('mongoose');
 
 var app = express();
@@ -30,10 +32,8 @@ mongoose.connect(process.env.MONGODB_URI)
 //routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-app.get('/chats', (req,res,next) => {
-  res.status(200).send('wesh')
-})
+app.use('/chats', chatsRouter);
+app.use('/message', messagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
