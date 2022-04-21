@@ -25,7 +25,7 @@ router.post('/', (req,res,next)=>{
                 .then(chat => {
                     chat.messages.push(resObj._id)
                     chat.save()
-                        .then(savedChat => res.status(200).send(savedChat))
+                        .then(savedChat => res.status(200).send(resObj))
                         .catch(err => res.status(500).send(err))
                 })
                 .catch(err => {

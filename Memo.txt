@@ -1,0 +1,1 @@
+Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 

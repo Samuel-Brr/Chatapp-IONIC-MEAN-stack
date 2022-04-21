@@ -17,6 +17,10 @@ export class ApiService {
     return this.httpClient.post(this.serverUrl+'/chats', chat)
   }
 
+  postResource(route:string, item):Observable<any>{
+    return this.httpClient.post(this.serverUrl + route, item)
+  }
+
   //User methods
 
   saveUser(user){

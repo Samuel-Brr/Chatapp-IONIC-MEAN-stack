@@ -7,7 +7,8 @@ const Message = new Schema({
         required: true
     },
     time: {
-        type: String | Date,
+        type: String,
+        required: true
     },
     chat_id: {
         type: String,

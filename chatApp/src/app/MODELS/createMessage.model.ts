@@ -1,6 +1,5 @@
-export class Message {
+export class CreateMessage {
   constructor(
-    public _id: string,
     public message: string,
     public chat_id: string,
     public from: string,
