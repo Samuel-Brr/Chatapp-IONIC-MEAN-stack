@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, tap, Subscription } from 'rxjs';
 import { Chat } from 'src/app/MODELS/chat.model';
 import { CreateMessage } from 'src/app/MODELS/createMessage.model';
 import { ApiService } from 'src/app/SERVICES/api.service';
+import { PusherService } from 'src/app/SERVICES/pusher.service';
 import { TabsService } from './../../../../SERVICES/tabs.service';
 
 @Component({
@@ -13,9 +14,6 @@ import { TabsService } from './../../../../SERVICES/tabs.service';
 })
 export class MessagePage implements OnInit {
   chat
-
-  private subject = new BehaviorSubject<Chat | null>(null);
-  chatData$: Observable<Chat | null> = this.subject.asObservable();
   chatData
   subscription: Subscription
 
@@ -24,16 +22,15 @@ export class MessagePage implements OnInit {
   constructor(private route: ActivatedRoute,
       private api: ApiService,
       private router: Router,
+      private pusher: PusherService,
       private tabsService: TabsService) {
 
         this.route.queryParams
           .pipe(
             tap(params => {
               if(this.router.getCurrentNavigation().extras.state){
-                this.subject.next(this.router.getCurrentNavigation().extras.state.chat)
                 this.chatData = this.router.getCurrentNavigation().extras.state.chat
               }
-              console.log(this.chatData$)
             })
           )
           .subscribe()
@@ -48,6 +45,9 @@ export class MessagePage implements OnInit {
       }
 
   ngOnInit() {
+    this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
+      this.chatData.messages.push(data)
+    })
   }
 
   ionViewWillEnter(){
