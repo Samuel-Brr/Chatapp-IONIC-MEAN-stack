@@ -8,7 +8,7 @@ const Chat = new Schema({
     },
     image: {
         type:String,
-        required: true
+        required: false
     },
     messages: [
         {

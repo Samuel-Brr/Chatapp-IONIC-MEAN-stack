@@ -13,4 +13,8 @@ export class ApiService {
     return this.httpClient.get(this.serverUrl+'/chats')
   }
 
+  postChats(chat):Observable<any>{
+    return this.httpClient.post(this.serverUrl+'/chats', chat)
+  }
+
 }

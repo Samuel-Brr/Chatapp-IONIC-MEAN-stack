@@ -4,6 +4,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+<form [formGroup]="registrationForm">
+  <ion-item>
+    <ion-label position="floating">Username <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input required formControlName="userName" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input formControlName="mdp" type="text"></ion-input>
+  </ion-item>
+  <ion-item style="margin-bottom: 40px ;">
+    <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input formControlName="confirmMdp" type="text"></ion-input>
+  </ion-item>
+  <ion-button expand="block" color="primary" (click)="onSubmit(registrationForm)" [disabled]="registrationForm.invalid">
+    Login
+  </ion-button>
+</form>
 </ion-content>
