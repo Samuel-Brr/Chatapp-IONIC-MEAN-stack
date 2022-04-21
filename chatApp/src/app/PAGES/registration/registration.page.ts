@@ -44,6 +44,7 @@ export class RegistrationPage implements OnInit, OnDestroy {
             })
             .then((alert)=>alert.present());
           console.log("Réponse du serveur:", responseObj);
+          this.api.saveUser(responseObj)
           this.router.navigateByUrl('/home/tabs/chats')
           }
         )
@@ -51,8 +52,13 @@ export class RegistrationPage implements OnInit, OnDestroy {
       .subscribe()
   }
 
+  ionViewDidLeave(){
+    this.subscription.unsubscribe()
+    console.log("registration page did leave the view")
+  }
+
   ngOnDestroy(): void {
-      this.subscription.unsubscribe()
+
   }
 
 }
