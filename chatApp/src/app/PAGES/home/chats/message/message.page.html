@@ -22,7 +22,8 @@
 <ion-content>
     <ion-item
       *ngFor="let message of chatData.messages; let i=index"
-      style="margin:5px 5px 5px auto; width: fit-content; border-radius: 6px; background-color: rgba(151, 242, 186, 0.832);"
+      class="userMessage"
+      [ngClass]="{'friendMessage': message.chat_id !== message.from}"
     >
       <ion-label style="margin: 0%;"> {{ message.message }} </ion-label>
       <ion-note slot="end" style="margin-inline: 6px" > {{ getDate() | date: 'shortTime'  }} </ion-note>

@@ -13,6 +13,7 @@ import { TabsService } from './../../../../SERVICES/tabs.service';
   styleUrls: ['./message.page.scss'],
 })
 export class MessagePage implements OnInit {
+  user
   chat
   chatData
   subscription: Subscription
@@ -34,28 +35,26 @@ export class MessagePage implements OnInit {
             })
           )
           .subscribe()
-
-        // this.route.queryParams.subscribe(params=>{
-        //   if(this.router.getCurrentNavigation().extras.state){
-        //   this.data =this.router.getCurrentNavigation().extras.state.chat;
-        //   console.log('data ', this.data)
-        //   }
-        // })
-
       }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    console.log("message page enter view")
+    this.tabsService.toggleTabs()
     this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
       this.chatData.messages.push(data)
     })
   }
 
-  ionViewWillEnter(){
-    this.tabsService.toggleTabs()
-  }
 
-  ionViewWillLeave(){
+  ionViewDidLeave(){
+    console.log("La page message va sortir de la view")
+    this.subscription?.unsubscribe()
+
     this.tabsService.toggleTabs()
+    this.pusher.unsubscribe('message')
   }
 
   getDate(){
@@ -63,11 +62,11 @@ export class MessagePage implements OnInit {
   }
 
   onPostMessage(){
-    const user = JSON.parse(this.api.getUser())
+    this.user = JSON.parse(this.api.getUser())
     const newMessage = new CreateMessage(
       this.chat,
       this.chatData._id,
-      user._id,
+      this.user._id,
       Date.now().toString()
     )
     this.subscription = this.api.postResource('/message', newMessage)
@@ -78,10 +77,6 @@ export class MessagePage implements OnInit {
         })
       )
       .subscribe()
-  }
-
-  ionViewDidLeave(){
-    this.subscription?.unsubscribe()
   }
 
 }

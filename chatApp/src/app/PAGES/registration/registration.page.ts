@@ -26,6 +26,7 @@ export class RegistrationPage implements OnInit, OnDestroy {
     private api: ApiService) { }
 
   ngOnInit() {
+    this.checkUserAuth()
   }
 
   onSubmit(form: FormGroup){
@@ -53,11 +54,18 @@ export class RegistrationPage implements OnInit, OnDestroy {
   }
 
   ionViewDidLeave(){
-    this.subscription.unsubscribe()
+    this.subscription?.unsubscribe()
     console.log("registration page did leave the view")
   }
 
   ngOnDestroy(): void {
+
+  }
+
+  checkUserAuth(){
+    if(this.api.getUser()){
+      this.router.navigateByUrl('/home/tabs/chats')
+    }
 
   }
 

@@ -1,3 +1,17 @@
 ion-content{
   --background: url("https://i.pinimg.com/originals/79/5c/ab/795cabc4647f73b365e2e6eabd0f34dc.png")
 }
+
+.userMessage{
+  margin:5px 5px 5px auto;
+  width: fit-content;
+  border-radius: 6px;
+  --ion-background-color: #9bbffe;
+}
+
+.friendMessage{
+  margin:5px auto 5px 5px;
+  width: fit-content;
+  border-radius: 6px;
+  --ion-background-color: white;
+}
