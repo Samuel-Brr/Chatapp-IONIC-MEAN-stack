@@ -41,11 +41,15 @@ export class MessagePage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.user = JSON.parse(this.api.getUser())
     console.log("message page enter view")
     this.tabsService.toggleTabs()
     this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
       this.chatData.messages.push(data)
     })
+
+    console.log("Id du chat:",this.chatData._id)
+    console.log("Id de l'utilisateur:",this.chatData._id)
   }
 
 
@@ -62,7 +66,8 @@ export class MessagePage implements OnInit {
   }
 
   onPostMessage(){
-    this.user = JSON.parse(this.api.getUser())
+
+    console.log(this.user)
     const newMessage = new CreateMessage(
       this.chat,
       this.chatData._id,
