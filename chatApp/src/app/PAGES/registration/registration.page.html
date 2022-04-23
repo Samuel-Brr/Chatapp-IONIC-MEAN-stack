@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registration</ion-title>
+    <ion-title>Inscription</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
     <ion-input formControlName="userName" type="text"></ion-input>
   </ion-item>
   <p *ngIf="f.userName.errors?.required && f.userName.touched" class="inputError">
-    Veuillez renseigner un Username
+    Veuillez renseigner un Identifiant
   </p>
 
 
@@ -37,7 +37,7 @@
 
 
   <ion-button style="margin-top: 40px ;" expand="block" color="primary" (click)="onSubmit(registrationForm)" [disabled]="registrationForm.invalid">
-    Login
+    Inscription
   </ion-button>
 </form>
 <a routerLink="/connexion">Déja inscrit ? Connectez vous en cliquant ici</a>

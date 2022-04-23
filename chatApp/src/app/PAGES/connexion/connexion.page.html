@@ -8,16 +8,24 @@
 
 <form [formGroup]="connexionForm">
   <ion-item>
-    <ion-label position="floating">Username <ion-text color="danger">*</ion-text></ion-label>
+    <ion-label position="floating">Identifiant <ion-text color="danger">*</ion-text></ion-label>
     <ion-input required formControlName="userName" type="text"></ion-input>
   </ion-item>
+  <p *ngIf="f.userName.errors?.required && f.userName.touched" class="inputError">
+    Veuillez renseigner un Identifiant
+  </p>
+
+
   <ion-item>
-    <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text></ion-label>
     <ion-input formControlName="mdp" type="text"></ion-input>
   </ion-item>
+  <p *ngIf="f.mdp.errors?.required && f.mdp.touched" class="inputError">
+    Veuillez renseigner un mot de passe
+  </p>
 
-  <ion-button expand="block" color="primary" (click)="onSubmit(connexionForm)" [disabled]="connexionForm.invalid">
-    Login
+  <ion-button style="margin-top: 40px ;" expand="block" color="primary" (click)="onSubmit(connexionForm)" [disabled]="connexionForm.invalid">
+    Connexion
   </ion-button>
 </form>
 <a routerLink="/registration">Pas encore inscrit ? Inscrivez vous en cliquant ici</a>

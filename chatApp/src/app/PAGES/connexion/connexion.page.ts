@@ -10,7 +10,7 @@ export class ConnexionPage implements OnInit {
 
   connexionForm: FormGroup = this.fb.group({
     userName:['', Validators.required],
-    mdp:['', ],
+    mdp:['', Validators.required ],
   });
 
   constructor(private fb: FormBuilder) { }
@@ -19,5 +19,10 @@ export class ConnexionPage implements OnInit {
   }
 
   onSubmit(form: FormGroup){}
+
+  // convenience getter for easy access to form fields
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  get f() { return this.connexionForm.controls; }
+
 
 }
