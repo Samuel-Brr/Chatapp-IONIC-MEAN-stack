@@ -5,38 +5,43 @@ import { Observable } from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class ApiService {
 
-  serverUrl: string = "http://localhost:3000"
+  serverUrl = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) { }
 
-  getChats():Observable<any>{
-    return this.httpClient.get(this.serverUrl+'/chats')
+  getChats(): Observable<any>{
+    return this.httpClient.get(this.serverUrl+'/chats');
   }
 
-  postChats(chat):Observable<any>{
-    return this.httpClient.post(this.serverUrl+'/chats', chat)
+  postChats(chat): Observable<any>{
+    // console.log('Objet utilisateur que j\'envoie au backend:', chat);
+    return this.httpClient.post(this.serverUrl+'/chats', chat);
   }
 
-  postResource(route:string, item):Observable<any>{
-    return this.httpClient.post(this.serverUrl + route, item)
+  postResource(route: string, item): Observable<any>{
+    return this.httpClient.post(this.serverUrl + route, item);
   }
 
   //User methods
 
   saveUser(user){
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   getUser(){
-    return localStorage.getItem('user')
+    return localStorage.getItem('user');
   }
 
   isRegistered(): boolean{
-    return localStorage.getItem('user')? true : false
+    return localStorage.getItem('user')? true : false;
   }
 
   userLogOut(){
-    return localStorage.removeItem('user')
+    return localStorage.removeItem('user');
+  }
+
+  getUserPfp(){
+    return this.httpClient.get('https://randomuser.me/api/?inc=picture');
   }
 
 }

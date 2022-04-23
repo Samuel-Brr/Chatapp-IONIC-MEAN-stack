@@ -15,7 +15,19 @@ const Chat = require('../models/chat.model');
  })
 
 router.post('/', (req,res,next)=>{
-    const newChat = new Chat(req.body)
+    console.log(req.body)
+
+    const name = req.body.name;
+    const mdp = req.body.mdp
+    const image = req.body.imageUrl
+    const messages = req.body.messages
+
+    const newChat = new Chat(
+        {name,
+        mdp,
+        image,
+        messages}
+    )
     newChat.save()
         .then((resObj) => res.status(201).send(resObj))
         .catch(err => {

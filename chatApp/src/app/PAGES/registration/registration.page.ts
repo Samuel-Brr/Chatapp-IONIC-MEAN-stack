@@ -6,15 +6,18 @@ import { ApiService } from 'src/app/SERVICES/api.service';
 import { Router } from '@angular/router';
 import { createPasswordStrengthValidator } from 'src/app/VALIDATORS/pswrdStrength.validator';
 import { ConfirmedValidator } from 'src/app/VALIDATORS/checkPswrd.validator';
+import { CreateChat } from './../../MODELS/createChat.model';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.page.html',
   styleUrls: ['./registration.page.scss'],
 })
-export class RegistrationPage implements OnInit, OnDestroy {
+export class RegistrationPage implements OnInit {
 
+  randomUserPfp;
   subscription: Subscription;
+  subscription2: Subscription;
 
   registrationForm: FormGroup = this.fb.group({
     userName:['', Validators.required],
@@ -35,20 +38,34 @@ export class RegistrationPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkUserAuth();
+    this.getRandomUserPfp();
   }
+
+  ionViewDidLeave(){
+    this.subscription?.unsubscribe();
+    this.subscription2?.unsubscribe();
+    console.log('registration page did leave the view');
+  }
+
 
   // convenience getter for easy access to form fields
   // eslint-disable-next-line @typescript-eslint/member-ordering
   get f() { return this.registrationForm.controls; }
 
   onSubmit(form: FormGroup){
+
     const userName = form.value.userName;
+    const mdp = form.value.mdp;
+    const pfp = this.randomUserPfp;
+    console.log('image de profile:', pfp);
+    const utilisateur = new CreateChat(
+      userName,
+      mdp,
+      pfp,
+      [],
+    );
 
-    const obj = {
-      name:userName
-    };
-
-    this.subscription = this.api.postChats(obj)
+    this.subscription = this.api.postChats(utilisateur)
       .pipe(
         tap(responseObj => {
           this.alertController.create({
@@ -58,21 +75,13 @@ export class RegistrationPage implements OnInit, OnDestroy {
             .then((alert)=>alert.present());
           console.log('Réponse du serveur:', responseObj);
           this.api.saveUser(responseObj);
-          this.router.navigateByUrl('/home/tabs/chats');
+          this.router.navigateByUrl('/connexion');
           }
         )
       )
       .subscribe();
   }
 
-  ionViewDidLeave(){
-    this.subscription?.unsubscribe();
-    console.log('registration page did leave the view');
-  }
-
-  ngOnDestroy(): void {
-
-  }
 
   checkUserAuth(){
     if(this.api.getUser()){
@@ -81,6 +90,17 @@ export class RegistrationPage implements OnInit, OnDestroy {
 
   }
 
-  segmentChanged(){}
+    getRandomUserPfp(){
+
+    this.subscription2 = this.api.getUserPfp()
+      .pipe(
+        tap((res: {results}) => {
+          this.randomUserPfp = res.results[0].picture.thumbnail;
+          // console.log(res.results[0].picture.thumbnail);
+        })
+      )
+      .subscribe();
+
+  }
 
 }

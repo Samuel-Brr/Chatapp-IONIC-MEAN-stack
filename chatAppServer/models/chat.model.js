@@ -7,13 +7,13 @@ const Chat = new Schema({
         required: true,
         unique: true,
     },
-    name: {
+    mdp: {
         type:String,
         required: true
     },
     image: {
         type:String,
-        required: false
+        required: true,
     },
     messages: [
         {

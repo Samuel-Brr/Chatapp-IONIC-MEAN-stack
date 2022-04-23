@@ -29,7 +29,7 @@
 
   <ion-item>
     <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input formControlName="confirmMdp" type="text"></ion-input>
+    <ion-input formControlName="confirmMdp" type="password"></ion-input>
   </ion-item>
   <div *ngIf="f.confirmMdp.touched && f.confirmMdp.invalid" class="alert alert-danger">
     <div class="inputError" *ngIf="f.confirmMdp.errors.confirmedValidator">Les mots de passe doivent être identiques</div>
