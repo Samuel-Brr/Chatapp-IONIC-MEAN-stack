@@ -11,7 +11,7 @@ export class ConnexionPage implements OnInit {
   connexionForm: FormGroup = this.fb.group({
     userName:['', Validators.required],
     mdp:['', ],
-  })
+  });
 
   constructor(private fb: FormBuilder) { }
 

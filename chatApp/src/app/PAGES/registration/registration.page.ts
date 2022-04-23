@@ -14,7 +14,7 @@ import { ConfirmedValidator } from 'src/app/VALIDATORS/checkPswrd.validator';
 })
 export class RegistrationPage implements OnInit, OnDestroy {
 
-  subscription: Subscription
+  subscription: Subscription;
 
   registrationForm: FormGroup = this.fb.group({
     userName:['', Validators.required],
@@ -26,7 +26,7 @@ export class RegistrationPage implements OnInit, OnDestroy {
     confirmMdp:['',Validators.required]
   },{
     validator: ConfirmedValidator('mdp','confirmMdp')
-  })
+  });
 
   constructor(private fb: FormBuilder,
     private alertController: AlertController,
@@ -34,18 +34,19 @@ export class RegistrationPage implements OnInit, OnDestroy {
     private api: ApiService) { }
 
   ngOnInit() {
-    this.checkUserAuth()
+    this.checkUserAuth();
   }
 
   // convenience getter for easy access to form fields
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   get f() { return this.registrationForm.controls; }
 
   onSubmit(form: FormGroup){
-    const userName = form.value.userName
+    const userName = form.value.userName;
 
     const obj = {
       name:userName
-    }
+    };
 
     this.subscription = this.api.postChats(obj)
       .pipe(
@@ -55,18 +56,18 @@ export class RegistrationPage implements OnInit, OnDestroy {
               buttons: ['OK']
             })
             .then((alert)=>alert.present());
-          console.log("Réponse du serveur:", responseObj);
-          this.api.saveUser(responseObj)
-          this.router.navigateByUrl('/home/tabs/chats')
+          console.log('Réponse du serveur:', responseObj);
+          this.api.saveUser(responseObj);
+          this.router.navigateByUrl('/home/tabs/chats');
           }
         )
       )
-      .subscribe()
+      .subscribe();
   }
 
   ionViewDidLeave(){
-    this.subscription?.unsubscribe()
-    console.log("registration page did leave the view")
+    this.subscription?.unsubscribe();
+    console.log('registration page did leave the view');
   }
 
   ngOnDestroy(): void {
@@ -75,7 +76,7 @@ export class RegistrationPage implements OnInit, OnDestroy {
 
   checkUserAuth(){
     if(this.api.getUser()){
-      this.router.navigateByUrl('/home/tabs/chats')
+      this.router.navigateByUrl('/home/tabs/chats');
     }
 
   }

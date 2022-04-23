@@ -1,5 +1,7 @@
-import { FormGroup } from "@angular/forms";
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+import { FormGroup } from '@angular/forms';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function ConfirmedValidator(controlName: string, matchingControlName: string){
   return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -12,5 +14,5 @@ export function ConfirmedValidator(controlName: string, matchingControlName: str
       } else {
           matchingControl.setErrors(null);
       }
-  }
+  };
 }

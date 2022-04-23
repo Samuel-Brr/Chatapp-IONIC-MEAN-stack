@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject, tap, Subscription } from 'rxjs';
@@ -13,10 +14,10 @@ import { TabsService } from './../../../../SERVICES/tabs.service';
   styleUrls: ['./message.page.scss'],
 })
 export class MessagePage implements OnInit {
-  user
-  chat
-  chatData
-  subscription: Subscription
+  user;
+  chat;
+  chatData;
+  subscription: Subscription;
 
 
 
@@ -30,58 +31,58 @@ export class MessagePage implements OnInit {
           .pipe(
             tap(params => {
               if(this.router.getCurrentNavigation().extras.state){
-                this.chatData = this.router.getCurrentNavigation().extras.state.chat
+                this.chatData = this.router.getCurrentNavigation().extras.state.chat;
               }
             })
           )
-          .subscribe()
+          .subscribe();
       }
 
   ngOnInit() {
   }
 
   ionViewWillEnter(){
-    this.user = JSON.parse(this.api.getUser())
-    console.log("message page enter view")
-    this.tabsService.toggleTabs()
+    this.user = JSON.parse(this.api.getUser());
+    console.log('message page enter view');
+    this.tabsService.toggleTabs();
     this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
-      this.chatData.messages.push(data)
-    })
+      this.chatData.messages.push(data);
+    });
 
-    console.log("Id du chat:",this.chatData._id)
-    console.log("Id de l'utilisateur:",this.chatData._id)
+    console.log('Id du chat:',this.chatData._id);
+    console.log('Id de l\'utilisateur:',this.chatData._id);
   }
 
 
   ionViewDidLeave(){
-    console.log("La page message va sortir de la view")
-    this.subscription?.unsubscribe()
+    console.log('La page message va sortir de la view');
+    this.subscription?.unsubscribe();
 
-    this.tabsService.toggleTabs()
-    this.pusher.unsubscribe('message')
+    this.tabsService.toggleTabs();
+    this.pusher.unsubscribe('message');
   }
 
   getDate(){
-    return new Date()
+    return new Date();
   }
 
   onPostMessage(){
 
-    console.log(this.user)
+    console.log(this.user);
     const newMessage = new CreateMessage(
       this.chat,
       this.chatData._id,
       this.user._id,
       Date.now().toString()
-    )
+    );
     this.subscription = this.api.postResource('/message', newMessage)
       .pipe(
         tap(res => {
-          console.log('Réponse à l\'envoie du message:', res)
-          this.chat = ''
+          console.log('Réponse à l\'envoie du message:', res);
+          this.chat = '';
         })
       )
-      .subscribe()
+      .subscribe();
   }
 
 }

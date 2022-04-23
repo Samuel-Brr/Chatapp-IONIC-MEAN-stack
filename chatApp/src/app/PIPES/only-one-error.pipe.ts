@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'onlyOneError'
@@ -8,18 +8,18 @@ export class OnlyOneErrorPipe implements PipeTransform {
   transform(allErrors: any, errorsPriority: string[]) {
 
     if(!allErrors){
-      return null
+      return null;
     }
 
-    const onlyOneError: any = {}
+    const onlyOneError: any = {};
 
-    for(let error of errorsPriority){
+    for(const error of errorsPriority){
       if (allErrors[error]){
-        onlyOneError[error] = allErrors[error]
-        break
+        onlyOneError[error] = allErrors[error];
+        break;
       }
     }
 
-    return onlyOneError
+    return onlyOneError;
   }
 }
