@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegistrationPageRoutingModule } from './registration-routing.module';
 
 import { RegistrationPage } from './registration.page';
+import { OnlyOneErrorPipe } from 'src/app/PIPES/only-one-error.pipe';
 
 @NgModule({
   imports: [
@@ -14,8 +15,9 @@ import { RegistrationPage } from './registration.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RegistrationPageRoutingModule
+    RegistrationPageRoutingModule,
+
   ],
-  declarations: [RegistrationPage]
+  declarations: [RegistrationPage, OnlyOneErrorPipe]
 })
 export class RegistrationPageModule {}

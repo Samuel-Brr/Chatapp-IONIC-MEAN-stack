@@ -4,6 +4,8 @@ import { AlertController } from '@ionic/angular';
 import { tap, Observable, Subscription } from 'rxjs';
 import { ApiService } from 'src/app/SERVICES/api.service';
 import { Router } from '@angular/router';
+import { createPasswordStrengthValidator } from 'src/app/VALIDATORS/pswrdStrength.validator';
+import { ConfirmedValidator } from 'src/app/VALIDATORS/checkPswrd.validator';
 
 @Component({
   selector: 'app-registration',
@@ -16,8 +18,14 @@ export class RegistrationPage implements OnInit, OnDestroy {
 
   registrationForm: FormGroup = this.fb.group({
     userName:['', Validators.required],
-    mdp:['', ],
-    confirmMdp:['',]
+    mdp:['',[
+      Validators.required,
+      Validators.minLength(8),
+      createPasswordStrengthValidator()
+    ] ],
+    confirmMdp:['',Validators.required]
+  },{
+    validator: ConfirmedValidator('mdp','confirmMdp')
   })
 
   constructor(private fb: FormBuilder,
@@ -28,6 +36,9 @@ export class RegistrationPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.checkUserAuth()
   }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.registrationForm.controls; }
 
   onSubmit(form: FormGroup){
     const userName = form.value.userName
