@@ -69,4 +69,6 @@ export class RegistrationPage implements OnInit, OnDestroy {
 
   }
 
+  segmentChanged(){}
+
 }

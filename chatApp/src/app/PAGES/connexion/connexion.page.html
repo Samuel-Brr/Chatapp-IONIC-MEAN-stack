@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registration</ion-title>
+    <ion-title>Connexion</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-<form [formGroup]="registrationForm">
+<form [formGroup]="connexionForm">
   <ion-item>
     <ion-label position="floating">Username <ion-text color="danger">*</ion-text></ion-label>
     <ion-input required formControlName="userName" type="text"></ion-input>
@@ -15,13 +15,11 @@
     <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
     <ion-input formControlName="mdp" type="text"></ion-input>
   </ion-item>
-  <ion-item style="margin-bottom: 40px ;">
-    <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input formControlName="confirmMdp" type="text"></ion-input>
-  </ion-item>
-  <ion-button expand="block" color="primary" (click)="onSubmit(registrationForm)" [disabled]="registrationForm.invalid">
+
+  <ion-button expand="block" color="primary" (click)="onSubmit(connexionForm)" [disabled]="connexionForm.invalid">
     Login
   </ion-button>
 </form>
-<a routerLink="/connexion">Déja inscrit ? Connectez vous en cliquant ici</a>
+<a routerLink="/registration">Pas encore inscrit ? Inscrivez vous en cliquant ici</a>
+
 </ion-content>
