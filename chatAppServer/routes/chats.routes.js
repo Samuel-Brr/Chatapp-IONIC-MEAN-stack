@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Chat = require('../models/chat.model');
+const bcrypt = require('bcrypt')
 
  router.get('/', (req,res,next) => {
      Chat.find({})
@@ -15,24 +16,31 @@ const Chat = require('../models/chat.model');
  })
 
 router.post('/', (req,res,next)=>{
-    console.log(req.body)
+    // console.log(req.body)
 
     const name = req.body.name;
     const mdp = req.body.mdp
     const image = req.body.imageUrl
     const messages = req.body.messages
 
-    const newChat = new Chat(
-        {name,
-        mdp,
-        image,
-        messages}
-    )
-    newChat.save()
-        .then((resObj) => res.status(201).send(resObj))
-        .catch(err => {
-            console.log("Couldn't save the chat", err)
-            res.status(500).send(err)
+    bcrypt.hash(mdp,12)
+        .then(hashedMdp =>{
+            const newChat = new Chat(
+                {name,
+                mdp: hashedMdp,
+                image,
+                messages}
+            )
+            newChat.save()
+                .then((resObj) => res.status(201).send(resObj))
+                .catch(err => {
+                    console.log("Couldn't save the chat", err)
+                    res.status(500).send(err)
+                })
+        })
+        .catch(e => {
+            console.log("An error happened when hashing the password", e)
+            res.status(500).send(e)
         })
 })
 

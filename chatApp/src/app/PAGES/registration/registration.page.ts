@@ -44,7 +44,7 @@ export class RegistrationPage implements OnInit {
   ionViewDidLeave(){
     this.subscription?.unsubscribe();
     this.subscription2?.unsubscribe();
-    console.log('registration page did leave the view');
+    // console.log('registration page did leave the view');
   }
 
 
@@ -57,7 +57,7 @@ export class RegistrationPage implements OnInit {
     const userName = form.value.userName;
     const mdp = form.value.mdp;
     const pfp = this.randomUserPfp;
-    console.log('image de profile:', pfp);
+    // console.log('image de profile:', pfp);
     const utilisateur = new CreateChat(
       userName,
       mdp,
@@ -69,11 +69,11 @@ export class RegistrationPage implements OnInit {
       .pipe(
         tap(responseObj => {
           this.alertController.create({
-              message: 'User Created 🥳',
+              message: 'Inscription réussie 🥳',
               buttons: ['OK']
             })
             .then((alert)=>alert.present());
-          console.log('Réponse du serveur:', responseObj);
+          // console.log('Réponse du serveur:', responseObj);
           this.api.saveUser(responseObj);
           this.router.navigateByUrl('/connexion');
           }

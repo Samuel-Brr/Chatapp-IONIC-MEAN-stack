@@ -1,1 +1,7 @@
 Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 
+Crypter les mots de passes
+faire les sessions
+mettre du crud
+validation des inputs coté serveur
+error handling accross the app
+reponsive mobile/bureaux

@@ -8,7 +8,7 @@
 
 <form [formGroup]="registrationForm">
   <ion-item>
-    <ion-label position="floating">Username <ion-text color="danger">*</ion-text></ion-label>
+    <ion-label position="floating">Identifiant <ion-text color="danger">*</ion-text></ion-label>
     <ion-input formControlName="userName" type="text"></ion-input>
   </ion-item>
   <p *ngIf="f.userName.errors?.required && f.userName.touched" class="inputError">
@@ -17,7 +17,7 @@
 
 
   <ion-item>
-    <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text></ion-label>
     <ion-input formControlName="mdp" type="password"></ion-input>
   </ion-item>
   <ng-container  *ngIf="f.mdp.errors | onlyOneError: ['minlength', 'required', 'passwordStrength']as error">
@@ -28,7 +28,7 @@
 
 
   <ion-item>
-    <ion-label position="floating">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
+    <ion-label position="floating">Confirmation mot de passe <ion-text color="danger">*</ion-text></ion-label>
     <ion-input formControlName="confirmMdp" type="password"></ion-input>
   </ion-item>
   <div *ngIf="f.confirmMdp.touched && f.confirmMdp.invalid" class="alert alert-danger">
