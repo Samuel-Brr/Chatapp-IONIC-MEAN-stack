@@ -4,6 +4,11 @@ const Schema = mongoose.Schema
 const Chat = new Schema({
     name: {
         type:String,
+        required: true,
+        unique: true,
+    },
+    name: {
+        type:String,
         required: true
     },
     image: {
