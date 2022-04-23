@@ -18,7 +18,7 @@
 
   <ion-item>
     <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input formControlName="mdp" type="text"></ion-input>
+    <ion-input formControlName="mdp" type="password"></ion-input>
   </ion-item>
   <p *ngIf="f.mdp.errors?.required && f.mdp.touched" class="inputError">
     Veuillez renseigner un mot de passe

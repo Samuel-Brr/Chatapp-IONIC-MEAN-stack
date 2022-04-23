@@ -19,7 +19,7 @@ export class ApiService {
   }
 
   postResource(route: string, item): Observable<any>{
-    return this.httpClient.post(this.serverUrl + route, item);
+    return this.httpClient.post(this.serverUrl + route, item, {observe: 'response'});
   }
 
   //User methods

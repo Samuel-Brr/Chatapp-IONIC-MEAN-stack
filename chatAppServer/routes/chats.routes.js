@@ -44,4 +44,33 @@ router.post('/', (req,res,next)=>{
         })
 })
 
- module.exports = router;
+router.post('/connexion', (req,res,next) => {
+    const name = req.body.name;
+    const mdp = req.body.mdp;
+
+    Chat.findOne({name: name})
+        .then(user => {
+            if(!user){
+                return res.status(422).send({statut:"Identifiant ou mot de passe incorrecte"})
+            }
+
+            bcrypt.compare(mdp, user.mdp)
+                .then(doMatch => {
+                    if(doMatch){
+                        return res.status(200).send({statut:"Connexion réussie"})
+                    }
+
+                    return res.status(422).send({statut:"Identifiant ou mot de passe incorrecte"})
+                })
+                .catch(e => {
+                    console.log(e)
+                    res.status(500).send(console.log("La comparaison des mots de passe a échoué", e))
+                })
+        })
+        .catch(e => {
+            console.log(e)
+            res.status(500).send(console.log("L'opération findOne à échouée"))
+        })
+})
+
+module.exports = router;
