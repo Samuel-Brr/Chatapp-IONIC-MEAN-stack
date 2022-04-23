@@ -5,27 +5,50 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors')
 const Pusher = require('pusher')
+const session = require("express-session")
+const MongoDBStore = require("connect-mongodb-session")(session)
+const Chat =require('./models/chat.model')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const chatsRouter = require('./routes/chats.routes')
 const messagesRouter = require('./routes/message.routes')
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 var app = express();
 
-require('dotenv').config()
+const store = new MongoDBStore({  // Création d'une nouvelle instance d'un store pour nos sessions utilisateurs
+  uri: process.env.MONGODB_URI,
+  collection: 'sessions'
+});
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
+//Middlewares
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({          //Parametrage de la session utilisateur
+  secret: process.env.SECRET, 
+  resave: false, 
+  saveUninitialized: false, 
+  store: store})
+)
+
+app.use((req, res, next) => {
+  if (!req.session.user) {   //Si il n y a pas de session en cours continuer sans rien faire
+    return next();
+  }
+  Chat.findById(req.session.user._id)
+    .then(user => {
+      req.user = user;   // Si il y a une session en cours l'utilisateur de la session devient un model mongoose
+      next();
+    })
+    .catch(err => console.log(err));
+});
 
 //configs
 mongoose.connect(process.env.MONGODB_URI)

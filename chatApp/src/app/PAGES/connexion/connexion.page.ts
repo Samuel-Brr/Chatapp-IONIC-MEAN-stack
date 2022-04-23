@@ -38,7 +38,7 @@ export class ConnexionPage implements OnInit {
       .pipe(
         tap(res => {
           console.log('Réponse à la connexion:', res);
-          if(res.status === 200){
+          if(res.status === 201){
             this.alertController.create({
               message: 'Connexion réussie 🥳',
               buttons: ['OK']

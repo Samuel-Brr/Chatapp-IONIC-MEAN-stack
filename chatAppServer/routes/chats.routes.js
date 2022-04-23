@@ -57,7 +57,14 @@ router.post('/connexion', (req,res,next) => {
             bcrypt.compare(mdp, user.mdp)
                 .then(doMatch => {
                     if(doMatch){
-                        return res.status(200).send({statut:"Connexion réussie"})
+                        req.session.isLoggedIn = true;
+                        req.session.user = user;
+                        req.session.save(e => {
+                            if(e){
+                                console.log("erreur lors de la sauvegarde de la session:", e)
+                            }
+                    })
+                        return res.status(201).send({message: "Session utilisateur initialisée"})
                     }
 
                     return res.status(422).send({statut:"Identifiant ou mot de passe incorrecte"})
