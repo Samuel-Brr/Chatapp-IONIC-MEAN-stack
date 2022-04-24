@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { tap, Observable, Subscription } from 'rxjs';
+import { tap, Observable, Subscription, map } from 'rxjs';
 import { ApiService } from 'src/app/SERVICES/api.service';
 import { Router } from '@angular/router';
 import { createPasswordStrengthValidator } from 'src/app/VALIDATORS/pswrdStrength.validator';
 import { ConfirmedValidator } from 'src/app/VALIDATORS/checkPswrd.validator';
 import { CreateChat } from './../../MODELS/createChat.model';
+import { AuthService } from 'src/app/SERVICES/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -34,10 +35,13 @@ export class RegistrationPage implements OnInit {
   constructor(private fb: FormBuilder,
     private alertController: AlertController,
     private router: Router,
+    private authService: AuthService,
     private api: ApiService) { }
 
   ngOnInit() {
-    this.checkUserAuth();
+    if(this.authService.isLoggedIn()){
+      this.router.navigate(['home','tabs','chats']);
+    }
     this.getRandomUserPfp();
   }
 
@@ -80,14 +84,6 @@ export class RegistrationPage implements OnInit {
         )
       )
       .subscribe();
-  }
-
-
-  checkUserAuth(){
-    if(this.api.getUser()){
-      this.router.navigateByUrl('/home/tabs/chats');
-    }
-
   }
 
     getRandomUserPfp(){

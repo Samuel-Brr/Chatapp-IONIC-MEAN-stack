@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport')
 
 const Message = require('../models/message.model')
 const Chat = require('../models/chat.model')
 
-router.get('/', (req,res,next) => {
+router.get('/',passport.authenticate('jwt', {session: false}), (req,res,next) => {
     Message.find({})
     .then(messages => {
         res.status(200).send(messages)
@@ -15,7 +16,7 @@ router.get('/', (req,res,next) => {
     })
 })
 
-router.post('/', (req,res,next)=>{
+router.post('/', passport.authenticate('jwt', {session: false}),(req,res,next)=>{
     const newMessage = new Message(req.body)
     newMessage.save()
         .then((resObj) => {

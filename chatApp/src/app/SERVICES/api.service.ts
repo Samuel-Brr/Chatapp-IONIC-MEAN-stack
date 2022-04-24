@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   getUser(){
-    return localStorage.getItem('user');
+    return localStorage.getItem('user_id');
   }
 
   isRegistered(): boolean{
@@ -44,4 +44,7 @@ export class ApiService {
     return this.httpClient.get('https://randomuser.me/api/?inc=picture');
   }
 
+  checkUserSession(){
+    return this.httpClient.get(this.serverUrl + '/chats/protected');
+  }
 }

@@ -14,7 +14,8 @@ import { TabsService } from './../../../../SERVICES/tabs.service';
   styleUrls: ['./message.page.scss'],
 })
 export class MessagePage implements OnInit {
-  user;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  user_id;
   chat;
   chatData;
   subscription: Subscription;
@@ -42,7 +43,8 @@ export class MessagePage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.user = JSON.parse(this.api.getUser());
+    console.log('toto',this.api.getUser());
+    this.user_id = this.api.getUser();
     console.log('message page enter view');
     this.tabsService.toggleTabs();
     this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
@@ -50,7 +52,7 @@ export class MessagePage implements OnInit {
     });
 
     console.log('Id du chat:',this.chatData._id);
-    console.log('Id de l\'utilisateur:',this.chatData._id);
+    console.log('Id de l\'utilisateur:',this.user_id);
   }
 
 
@@ -68,11 +70,11 @@ export class MessagePage implements OnInit {
 
   onPostMessage(){
 
-    console.log(this.user);
+    // console.log(this.user);
     const newMessage = new CreateMessage(
       this.chat,
       this.chatData._id,
-      this.user._id,
+      this.user_id,
       Date.now().toString()
     );
     this.subscription = this.api.postResource('/message', newMessage)

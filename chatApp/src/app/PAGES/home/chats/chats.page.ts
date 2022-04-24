@@ -47,4 +47,11 @@ export class ChatsPage implements OnInit {
     this.navCtrl.navigateForward('/home/tabs/chats/message', navigationExtra);
   }
 
+  onTest(){
+    this.api.checkUserSession()
+      .pipe(
+        tap(res => console.log(res))
+      )
+      .subscribe();
+  }
 }

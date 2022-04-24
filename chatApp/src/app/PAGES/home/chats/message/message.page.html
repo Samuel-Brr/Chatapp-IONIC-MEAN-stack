@@ -23,7 +23,7 @@
     <ion-item
       *ngFor="let message of chatData.messages; let i=index"
       class="userMessage"
-      [ngClass]="{'friendMessage': message.from !== user?._id}"
+      [ngClass]="{'friendMessage': message.from !== user_id}"
     >
       <ion-label style="margin: 0%;"> {{ message.message }} </ion-label>
       <ion-note slot="end" style="margin-inline: 6px" > {{ getDate() | date: 'shortTime'  }} </ion-note>

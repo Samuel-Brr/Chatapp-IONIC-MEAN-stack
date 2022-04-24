@@ -10,16 +10,16 @@ import { TabsService } from './../../SERVICES/tabs.service';
 })
 export class HomePage implements OnInit {
 
-  tabsStatus$: Observable<boolean>
+  tabsStatus$: Observable<boolean>;
 
   constructor(private tabsService: TabsService) { }
 
   ngOnInit() {
-    this.tabsStatus$ = this.tabsService.showTabs$
-    console.log('status des tabs:', this.tabsStatus$)
+    this.tabsStatus$ = this.tabsService.showTabs$;
+    console.log('status des tabs:', this.tabsStatus$);
   }
 
   segmentChanged(event: CustomEvent<SegmentChangeEventDetail>){
-    console.log(event.detail)
+    console.log(event.detail);
   }
 }

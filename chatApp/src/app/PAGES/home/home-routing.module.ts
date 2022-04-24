@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/GUARDS/auth.guard';
 
 import { HomePage } from './home.page';
 
@@ -13,11 +14,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./chats/chats.module').then(m => m.ChatsPageModule)
+            loadChildren: () => import('./chats/chats.module').then(m => m.ChatsPageModule),
+            canLoad:[AuthGuard]
           },
           {
             path: ':messageId',
-            loadChildren: () => import('./chats/message/message.module').then(m => m.MessagePageModule)
+            loadChildren: () => import('./chats/message/message.module').then(m => m.MessagePageModule),
+            canLoad:[AuthGuard]
           }
         ]
       },
@@ -26,7 +29,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./status/status.module').then(m => m.StatusPageModule)
+            loadChildren: () => import('./status/status.module').then(m => m.StatusPageModule),
+            canLoad:[AuthGuard]
           },
         ]
       },
@@ -35,7 +39,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./calls/calls.module').then(m => m.CallsPageModule)
+            loadChildren: () => import('./calls/calls.module').then(m => m.CallsPageModule),
+            canLoad:[AuthGuard]
           }
         ]
       },

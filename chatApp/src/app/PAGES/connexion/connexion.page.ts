@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/SERVICES/api.service';
 import { tap, Subscription, catchError, throwError } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/SERVICES/auth.service';
 
 @Component({
   selector: 'app-connexion',
@@ -22,6 +23,7 @@ export class ConnexionPage implements OnInit {
   constructor(private fb: FormBuilder,
     private alertController: AlertController,
     private router: Router,
+    private authService: AuthService,
     private api: ApiService) { }
 
   ngOnInit() {
@@ -38,12 +40,15 @@ export class ConnexionPage implements OnInit {
       .pipe(
         tap(res => {
           console.log('Réponse à la connexion:', res);
-          if(res.status === 201){
+          if(res.status === 200){
             this.alertController.create({
               message: 'Connexion réussie 🥳',
               buttons: ['OK']
             })
             .then((alert)=>alert.present());
+
+            // If the user authenticates successfully, we need to store the JWT returned in localStorage
+            this.authService.setLocalStorage(res);
 
             this.router.navigateByUrl('/home/tabs/chats');
           }
@@ -61,7 +66,7 @@ export class ConnexionPage implements OnInit {
   }
 
   ionViewDidLeave(){
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   // convenience getter for easy access to form fields
