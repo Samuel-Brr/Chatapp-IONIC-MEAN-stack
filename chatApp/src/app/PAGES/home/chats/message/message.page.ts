@@ -56,6 +56,10 @@ export class MessagePage implements OnInit {
     this.pusher.subscribeToChannel('message', ['deleted'], () => {
       this.chatData.messages.pop();
     });
+    this.pusher.subscribeToChannel('message', ['updated'], (data) => {
+      this.chatData.messages[this.chatData.messages.length - 1].message = data.message;
+      // arr.splice(index,1,item);
+    });
 
     console.log('Id du chat:',this.chatData._id);
     console.log('Id de l\'utilisateur:',this.user_id);

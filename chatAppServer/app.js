@@ -61,8 +61,17 @@ db.once('open', () => {
           time: messageDetails.time
         }
       )
-    }else if(change.operationType == 'delete'){
+    }
+    else if(change.operationType == 'delete'){
       pusher.trigger('message', 'deleted',{})
+    }
+    else if(change.operationType == 'update'){
+      const messageDetails = change.updateDescription.updatedFields.message;
+      pusher.trigger(
+        'message', 'updated', {
+          message: messageDetails
+        }
+      )
     }
   }) 
 }) 
