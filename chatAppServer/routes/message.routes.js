@@ -40,4 +40,15 @@ router.post('/', passport.authenticate('jwt', {session: false}),(req,res,next)=>
         })
 })
 
+router.delete('/', (req,res) => {
+    console.log(req.body.message_id)
+    const messageId = req.body.message_id
+
+    Message.findOneAndDelete({_id: messageId}, (e,doc)=>{
+        if(e){res.status(500).send(e)}
+        res.send(doc)
+    })
+        
+})
+
 module.exports = router

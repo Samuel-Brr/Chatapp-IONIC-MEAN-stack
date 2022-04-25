@@ -22,6 +22,10 @@ export class ApiService {
     return this.httpClient.post(this.serverUrl + route, item, {observe: 'response'});
   }
 
+  deleteMessage(item){
+    return this.httpClient.delete(this.serverUrl + '/message', {body: item });
+  }
+
   //User methods
 
   saveUser(user){

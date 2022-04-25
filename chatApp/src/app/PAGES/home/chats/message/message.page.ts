@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -134,7 +135,15 @@ export class MessagePage implements OnInit {
           }, {
             text: 'Supprimer',
             handler: () => {
-              console.log('Confirm Okay');
+              console.log('supprimer clicked', messageId);
+              this.api.deleteMessage({message_id: messageId})
+                .pipe(
+                  tap(res => {
+                    console.log('Réponse à la suppression du msg:', res);
+                    this.chatData.messages.pop();
+                  })
+                )
+                .subscribe();
             }
           }
         ]
