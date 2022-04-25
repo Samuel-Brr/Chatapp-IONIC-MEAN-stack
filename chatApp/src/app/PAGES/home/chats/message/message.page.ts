@@ -118,4 +118,27 @@ export class MessagePage implements OnInit {
         ]
       }).then(alertEl => alertEl.present() );
   }
+
+  onDeleteMessage(messageId: string){
+
+      const alert = this.alertController.create({
+        header: 'Supprimer le message ?',
+        buttons: [
+          {
+            text: 'Annuler',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Supprimer',
+            handler: () => {
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      }).then(alertEl => alertEl.present());
+
+  }
 }
