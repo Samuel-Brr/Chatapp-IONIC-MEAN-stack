@@ -54,4 +54,11 @@ export class ApiService {
   checkUserSession(){
     return this.httpClient.get(this.serverUrl + '/chats/protected');
   }
+
+  //Test
+
+  test(){
+    return this.httpClient.get(this.serverUrl + '/admin');
+  }
+
 }

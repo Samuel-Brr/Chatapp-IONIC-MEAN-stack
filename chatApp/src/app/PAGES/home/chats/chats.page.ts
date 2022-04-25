@@ -50,6 +50,12 @@ export class ChatsPage implements OnInit {
   }
 
   onTest(){
-    this.router.navigate(['/admin']);
+    this.api.test()
+      .pipe(
+        tap(res => {
+          console.log(res);
+         })
+      )
+      .subscribe();
   }
 }

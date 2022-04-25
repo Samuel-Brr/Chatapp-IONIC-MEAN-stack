@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const chatsRouter = require('./routes/chats.routes')
 const messagesRouter = require('./routes/message.routes')
+const adminRouter = require('./routes/admin.routes')
 const mongoose = require('mongoose');
 const passport = require('passport')
 require('dotenv').config()
@@ -82,6 +83,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/chats', chatsRouter);
 app.use('/message', messagesRouter);
-
+app.use('/admin', adminRouter);
 
 module.exports = app;
