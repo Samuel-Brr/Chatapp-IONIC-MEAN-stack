@@ -54,12 +54,15 @@ db.once('open', () => {
       const messageDetails = change.fullDocument;
       pusher.trigger(
         'message', 'inserted', {
+          _id: messageDetails._id,
           message: messageDetails.message,
           chat_id: messageDetails.chat_id,
           from: messageDetails.from,
           time: messageDetails.time
         }
       )
+    }else if(change.operationType == 'delete'){
+      pusher.trigger('message', 'deleted',{})
     }
   }) 
 }) 

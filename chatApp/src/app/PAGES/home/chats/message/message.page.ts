@@ -53,6 +53,9 @@ export class MessagePage implements OnInit {
     this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
       this.chatData.messages.push(data);
     });
+    this.pusher.subscribeToChannel('message', ['deleted'], () => {
+      this.chatData.messages.pop();
+    });
 
     console.log('Id du chat:',this.chatData._id);
     console.log('Id de l\'utilisateur:',this.user_id);
@@ -140,7 +143,6 @@ export class MessagePage implements OnInit {
                 .pipe(
                   tap(res => {
                     console.log('Réponse à la suppression du msg:', res);
-                    this.chatData.messages.pop();
                   })
                 )
                 .subscribe();
