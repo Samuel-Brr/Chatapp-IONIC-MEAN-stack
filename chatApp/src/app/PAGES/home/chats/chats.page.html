@@ -8,18 +8,23 @@
   <ion-list>
 
     <ng-container *ngIf="(chatArr$|async) as chatArr">
+      <ng-container *ngFor="let chat of chatArr">
 
-      <ion-item detail button (click)="selectChat(chat)" *ngFor="let chat of chatArr">
-        <ion-avatar slot="start">
-          <img [src]="chat.image" alt="une image" />
-        </ion-avatar>
-        <ion-label>
-          <p><strong> {{ chat.name }} </strong></p>
-          <p> {{chat.messages[chat.messages.length - 1]?.message}} </p>
-        </ion-label>
-        <ion-note slot="end">{{chat.messages[chat.messages.length - 1]?.time | date: 'shortTime'}}</ion-note>
-      </ion-item>
 
+        <ion-item detail button (click)="selectChat(chat)" *ngIf="chat.name !== 'Admin'">
+
+          <ion-avatar slot="start">
+            <img [src]="chat.image" alt="une image" />
+          </ion-avatar>
+          <ion-label>
+            <p><strong> {{ chat.name }} </strong></p>
+            <p> {{chat.messages[chat.messages.length - 1]?.message}} </p>
+          </ion-label>
+          <ion-note slot="end">{{chat.messages[chat.messages.length - 1]?.time | date: 'shortTime'}}</ion-note>
+
+        </ion-item>
+
+      </ng-container>
     </ng-container>
 
   </ion-list>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { BehaviorSubject, tap, Observable, catchError, throwError } from 'rxjs';
 import { Chat } from 'src/app/MODELS/chat.model';
@@ -16,7 +16,9 @@ export class ChatsPage implements OnInit {
   private subject = new BehaviorSubject<Chat[]>([]);
   chatArr$: Observable<Chat[]> = this.subject.asObservable();
 
-  constructor(private api: ApiService, private navCtrl: NavController ) { }
+  constructor(private api: ApiService,
+    private router: Router,
+    private navCtrl: NavController ) { }
 
   ngOnInit() {
     this.getAllChats();
@@ -48,6 +50,6 @@ export class ChatsPage implements OnInit {
   }
 
   onTest(){
-    console.log(this.chatArr$);
+    this.router.navigate(['/admin']);
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './GUARDS/admin.guard';
 import { AuthGuard } from './GUARDS/auth.guard';
 
 const routes: Routes = [
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'connexion',
     loadChildren: () => import('./PAGES/connexion/connexion.module').then( m => m.ConnexionPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./PAGES/admin/admin.module').then( m => m.AdminPageModule),
+    canLoad: [AdminGuard]
   }
 ];
 

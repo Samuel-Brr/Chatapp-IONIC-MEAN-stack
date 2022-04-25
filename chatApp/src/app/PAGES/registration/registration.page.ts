@@ -39,7 +39,14 @@ export class RegistrationPage implements OnInit {
     private api: ApiService) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter(){
     if(this.authService.isLoggedIn()){
+
+      if(this.api.getUser() === '626682f4fa8b7172b8fe5eac'){
+       return this.router.navigate(['admin']);
+      }
       this.router.navigate(['home','tabs','chats']);
     }
     this.getRandomUserPfp();
