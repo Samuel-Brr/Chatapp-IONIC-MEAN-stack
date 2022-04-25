@@ -5,7 +5,7 @@ export class Chat {
     public _id: string,
     public name: string,
     public mdp: string,
-    public imageUrl: string,
+    public image: string,
     public messages: Message[],
   ){}
 }

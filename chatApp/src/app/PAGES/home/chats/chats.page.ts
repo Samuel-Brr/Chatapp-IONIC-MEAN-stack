@@ -48,10 +48,6 @@ export class ChatsPage implements OnInit {
   }
 
   onTest(){
-    this.api.checkUserSession()
-      .pipe(
-        tap(res => console.log(res))
-      )
-      .subscribe();
+    console.log(this.chatArr$);
   }
 }

@@ -11,13 +11,13 @@
 
       <ion-item detail button (click)="selectChat(chat)" *ngFor="let chat of chatArr">
         <ion-avatar slot="start">
-          <img src="https://randomuser.me/api/portraits/women/60.jpg" alt="une image" />
+          <img [src]="chat.image" alt="une image" />
         </ion-avatar>
         <ion-label>
           <p><strong> {{ chat.name }} </strong></p>
           <p> {{chat.messages[chat.messages.length - 1]?.message}} </p>
         </ion-label>
-        <ion-note slot="end">Date</ion-note>
+        <ion-note slot="end">{{chat.messages[chat.messages.length - 1]?.time | date: 'shortTime'}}</ion-note>
       </ion-item>
 
     </ng-container>
