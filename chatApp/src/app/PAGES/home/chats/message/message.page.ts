@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Observable, BehaviorSubject, tap, Subscription } from 'rxjs';
 import { Chat } from 'src/app/MODELS/chat.model';
 import { CreateMessage } from 'src/app/MODELS/createMessage.model';
@@ -25,6 +26,7 @@ export class MessagePage implements OnInit {
   constructor(private route: ActivatedRoute,
       private api: ApiService,
       private router: Router,
+      private alertController: AlertController,
       private pusher: PusherService,
       private tabsService: TabsService) {
 
@@ -87,4 +89,33 @@ export class MessagePage implements OnInit {
       .subscribe();
   }
 
+  onEditMessage(messageId: string){
+    const alert =  this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Modifier votre message',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Modifier votre message'
+        }
+      ],
+        buttons: [
+          {
+            text: 'Annuler',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            }
+          },
+          {
+            text: 'Modifier',
+            handler: () => {
+              console.log('Confirm Ok');
+            }
+          }
+        ]
+      }).then(alertEl => alertEl.present() );
+  }
 }
