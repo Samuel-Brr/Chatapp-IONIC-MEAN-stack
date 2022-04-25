@@ -53,9 +53,7 @@
         <ion-icon slot="icon-only" name="happy-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-item lines="none" fill="outline" shape="round">
-      <ion-input size="small" type="text" placeholder="Awesome Input" name="chat" [(ngModel)]="chat" ></ion-input>
-    </ion-item>
+      <input class="messageInput" size="small" type="text" placeholder="Awesome Input" name="chat" [(ngModel)]="chat">
     <ion-buttons slot="secondary">
       <ion-button (click)="onPostMessage()">
         <ion-icon slot="icon-only" name="send-outline"></ion-icon>
