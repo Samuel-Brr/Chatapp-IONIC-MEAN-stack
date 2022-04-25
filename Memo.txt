@@ -1,9 +1,10 @@
-Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 
-Crypter les mots de passes
-faire les sessions
 mettre du crud
-refactor de l'architecture backend => extraire les controllers des routes
-validation des inputs coté serveur
-error handling accross the app
+page admin
+validation des inputs coté serveur / protection injection sql
 reponsive mobile/bureaux
+seo
+display le nom et limage de lutilisateur pas chat et message
+Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 
+refactor de l'architecture backend => extraire les controllers des routes
+error handling accross the app
 loading spinners lors des api calls nottement a la connexion

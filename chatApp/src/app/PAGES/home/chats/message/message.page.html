@@ -20,14 +20,29 @@
 </ion-header>
 
 <ion-content>
-    <ion-item
-      *ngFor="let message of chatData.messages; let i=index"
-      class="userMessage"
-      [ngClass]="{'friendMessage': message.from !== user_id}"
+
+    <ion-item-sliding *ngFor="let message of chatData.messages; let i=index"
+    class="userMessage"
+    [ngClass]="{'friendMessage': message.from !== user_id}"
     >
-      <ion-label style="margin: 0%;"> {{ message.message }} </ion-label>
-      <ion-note slot="end" style="margin-inline: 6px" > {{ getDate() | date: 'shortTime'  }} </ion-note>
-    </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="primary" *ngIf="i === chatData.messages.length - 1 && chatData._id === user_id">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
+        <ion-label style="margin: 0%;"> {{ message.message }} </ion-label>
+        <ion-note slot="end" style="margin-inline: 6px" > {{ getDate() | date: 'shortTime'  }} </ion-note>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" *ngIf="i === chatData.messages.length - 1 && chatData._id === user_id" >
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
 </ion-content>
 
 
