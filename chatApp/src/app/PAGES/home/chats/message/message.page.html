@@ -33,7 +33,7 @@
 
       <ion-item>
         <ion-label style="margin: 0%;"> {{ message.message }} </ion-label>
-        <ion-note slot="end" style="margin-inline: 6px" > {{ getDate() | date: 'shortTime'  }} </ion-note>
+        <ion-note slot="end" style="margin-inline: 6px" > {{ message.time | date: 'shortTime'  }} </ion-note>
       </ion-item>
 
       <ion-item-options side="end">

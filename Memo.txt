@@ -1,5 +1,3 @@
-mettre du crud
-page admin
 validation des inputs coté serveur / protection injection sql
 reponsive mobile/bureaux
 seo
