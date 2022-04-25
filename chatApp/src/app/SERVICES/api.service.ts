@@ -22,10 +22,13 @@ export class ApiService {
     return this.httpClient.post(this.serverUrl + route, item, {observe: 'response'});
   }
 
-  deleteMessage(item){
-    return this.httpClient.delete(this.serverUrl + '/message', {body: item });
+  deleteMessage(messageId){
+    return this.httpClient.delete(this.serverUrl + '/message', {body: messageId });
   }
 
+  updateMessage(reqBody){
+    return this.httpClient.put(this.serverUrl + '/message', {body: reqBody });
+  }
   //User methods
 
   saveUser(user){

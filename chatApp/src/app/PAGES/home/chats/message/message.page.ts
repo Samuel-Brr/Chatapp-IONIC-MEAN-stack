@@ -94,6 +94,7 @@ export class MessagePage implements OnInit {
   }
 
   onEditMessage(messageId: string){
+
     const alert =  this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Modifier votre message',
@@ -110,13 +111,20 @@ export class MessagePage implements OnInit {
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              console.log('Confirm Cancel');
             }
           },
           {
             text: 'Modifier',
-            handler: () => {
-              console.log('Confirm Ok');
+            handler: (data) => {
+
+              this.api.updateMessage({message_id: messageId, message: data.name1})
+                .pipe(
+                  tap(res => {
+                    console.log('Réponse à la maj du msg:', res);
+                  })
+                )
+                .subscribe();
+
             }
           }
         ]

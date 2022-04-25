@@ -44,11 +44,28 @@ router.delete('/', (req,res) => {
     console.log(req.body.message_id)
     const messageId = req.body.message_id
 
-    Message.findOneAndDelete({_id: messageId}, (e,doc)=>{
+    Message.findOneAndDelete({_id: messageId}, (e,doc) => {
         if(e){res.status(500).send(e)}
-        res.send(doc)
+        res.send({succes: true, response: doc})
     })
         
+})
+
+router.put('/', (req,res) => {
+
+    console.log(req.body)
+
+    const messageId = req.body.body.message_id
+    const message = req.body.body.message
+
+    // Message.findOneAndUpdate({_id: messageId},{message: message}, (e,doc) => {
+    //     if(e){res.status(500).send(e)}
+    //     res.send({succes: true, response: doc})
+    // })
+
+    Message.findByIdAndUpdate(messageId, {message: message})
+        .then((doc) => res.status(204).send(doc))
+        .catch((e)=>res.status(500).send(e))
 })
 
 module.exports = router
