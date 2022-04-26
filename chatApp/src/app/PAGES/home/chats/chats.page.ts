@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { BehaviorSubject, tap, Observable, catchError, throwError } from 'rxjs';
 import { Chat } from 'src/app/MODELS/chat.model';
 import { ApiService } from 'src/app/SERVICES/api.service';
+import { AuthService } from 'src/app/SERVICES/auth.service';
 
 @Component({
   selector: 'app-chats',
@@ -17,6 +18,8 @@ export class ChatsPage implements OnInit {
   chatArr$: Observable<Chat[]> = this.subject.asObservable();
 
   constructor(private api: ApiService,
+    private authService: AuthService,
+    private alertController: AlertController,
     private router: Router,
     private navCtrl: NavController ) { }
 
@@ -57,5 +60,32 @@ export class ChatsPage implements OnInit {
          })
       )
       .subscribe();
+  }
+
+  onLogout(){
+
+
+    const alert = this.alertController.create({
+      header: 'Déconnexion',
+      message: 'Etes vous sur de vouloir vous déconnecter ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Déconnexion',
+          handler: () => {
+            this.authService.logout();
+            this.router.navigate(['registration']);
+          }
+        }
+      ]
+    }).then(alertEl => alertEl.present());
+
+
   }
 }

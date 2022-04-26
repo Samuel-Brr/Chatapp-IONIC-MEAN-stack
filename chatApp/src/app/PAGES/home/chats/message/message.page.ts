@@ -164,4 +164,7 @@ export class MessagePage implements OnInit {
       }).then(alertEl => alertEl.present());
 
   }
+
+
+
 }

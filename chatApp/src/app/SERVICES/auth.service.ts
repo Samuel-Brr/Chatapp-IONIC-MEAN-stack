@@ -38,6 +38,8 @@ setLocalStorage(responseObj) {
 logout() {
   localStorage.removeItem('id_token');
   localStorage.removeItem('expires_at');
+  localStorage.removeItem('user');
+  localStorage.removeItem('user_id');
 }
 
 public isLoggedIn() {

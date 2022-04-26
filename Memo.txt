@@ -1,6 +1,5 @@
 reponsive mobile/bureaux
 seo
 Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 
-refactor de l'architecture backend => extraire les controllers des routes
 error handling accross the app
 loading spinners lors des api calls nottement a la connexion
