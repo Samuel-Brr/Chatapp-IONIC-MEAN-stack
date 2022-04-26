@@ -1,7 +1,5 @@
-validation des inputs coté serveur / protection injection sql
 reponsive mobile/bureaux
 seo
-display la date de chaque msg sur la page message
 Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 
 refactor de l'architecture backend => extraire les controllers des routes
 error handling accross the app

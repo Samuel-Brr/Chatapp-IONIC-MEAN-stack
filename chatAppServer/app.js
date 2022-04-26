@@ -16,10 +16,12 @@ const mongoose = require('mongoose');
 const passport = require('passport')
 require('dotenv').config()
 require('./config/passport')(passport)
+const mongoSanitize = require('express-mongo-sanitize')
 
 var app = express();
 
 //Middlewares
+app.use(mongoSanitize())
 app.use(passport.initialize())
 app.use(cors());
 app.use(logger('dev'));

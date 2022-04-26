@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken')
 const path = require('path')
 const fs = require('fs')
 const passport = require('passport')
+const {body} = require('express-validator')
+const {validationResult} = require('express-validator')
 
 const pathToKey = path.join(__dirname, '..', 'id_rsa_priv.pem');
 const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
@@ -22,8 +24,19 @@ const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
         })
  })
 
-router.post('/', (req,res,next)=>{
+router.post('/',
+body('name').not().isEmpty().trim().escape(),
+body('mdp').isLength({ min: 8 }).trim().escape(),
+body('imageUrl').isURL(),
+body('messages').isEmpty(), 
+(req,res,next)=>{
     // console.log(req.body)
+
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     const name = req.body.name;
     const mdp = req.body.mdp
@@ -51,7 +64,15 @@ router.post('/', (req,res,next)=>{
         })
 })
 
-router.post('/connexion', (req,res,next) => {
+router.post('/connexion',
+body('name').not().isEmpty().trim().escape(),
+body('mdp').isLength({ min: 8 }).trim().escape(),
+ (req,res,next) => {
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const name = req.body.name;
     const mdp = req.body.mdp;
 

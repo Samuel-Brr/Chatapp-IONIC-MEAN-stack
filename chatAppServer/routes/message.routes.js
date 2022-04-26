@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport')
-
+const {body} = require('express-validator')
+const {validationResult} = require('express-validator')
 const Message = require('../models/message.model')
 const Chat = require('../models/chat.model')
 
@@ -16,7 +17,19 @@ router.get('/',passport.authenticate('jwt', {session: false}), (req,res,next) =>
     })
 })
 
-router.post('/', passport.authenticate('jwt', {session: false}),(req,res,next)=>{
+router.post('/',
+body('message').not().isEmpty().trim().escape(),
+body('chat_id').isMongoId(),
+body('from').isMongoId(),
+body('time').not().isEmpty().trim().escape(), 
+passport.authenticate('jwt', {session: false}),(req,res,next)=>{
+    
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    }
+    
     const newMessage = new Message(req.body)
     newMessage.save()
         .then((resObj) => {
@@ -40,7 +53,17 @@ router.post('/', passport.authenticate('jwt', {session: false}),(req,res,next)=>
         })
 })
 
-router.delete('/', (req,res) => {
+router.delete('/',
+body('message_id').isMongoId(),
+passport.authenticate('jwt', {session: false}),
+ (req,res) => {
+
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     console.log(req.body.message_id)
     const messageId = req.body.message_id
 
@@ -51,7 +74,17 @@ router.delete('/', (req,res) => {
         
 })
 
-router.put('/', (req,res) => {
+router.put('/',
+body('message_id').isMongoId(),
+body('message').not().isEmpty().trim().escape(),
+passport.authenticate('jwt', {session: false}),
+ (req,res) => {
+
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     console.log(req.body)
 
