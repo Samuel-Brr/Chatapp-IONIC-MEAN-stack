@@ -21,6 +21,8 @@ export class RegistrationPage implements OnInit {
   subscription2: Subscription;
 
   registrationForm: FormGroup = this.fb.group({
+
+    // controlTwo:['1', Validators.pattern(/foo/)],
     userName:['', Validators.required],
     mdp:['',[
       Validators.required,
