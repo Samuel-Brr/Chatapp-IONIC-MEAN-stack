@@ -46,10 +46,12 @@ export class MessagePage implements OnInit {
   }
 
   ionViewWillEnter(){
-    console.log('toto',this.api.getUser());
-    this.user_id = this.api.getUser();
-    console.log('message page enter view');
+    // console.log('toto',this.api.getUser());
+    // console.log('message page enter view');
     this.tabsService.toggleTabs();
+
+    this.user_id = this.api.getUser();
+
     this.pusher.subscribeToChannel('message', ['inserted'], (data) => {
       this.chatData.messages.push(data);
     });
@@ -58,7 +60,7 @@ export class MessagePage implements OnInit {
     });
     this.pusher.subscribeToChannel('message', ['updated'], (data) => {
       this.chatData.messages[this.chatData.messages.length - 1].message = data.message;
-      // arr.splice(index,1,item);
+
     });
 
     console.log('Id du chat:',this.chatData._id);

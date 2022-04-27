@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CreateChat } from '../MODELS/createChat.model';
+import { Chat } from '../MODELS/chat.model';
 
 @Injectable({providedIn: 'root'})
 export class ApiService {
@@ -13,9 +15,9 @@ export class ApiService {
     return this.httpClient.get(this.serverUrl+'/chats');
   }
 
-  postChats(chat): Observable<any>{
+  postChats(chat: CreateChat): Observable<Chat>{
     // console.log('Objet utilisateur que j\'envoie au backend:', chat);
-    return this.httpClient.post(this.serverUrl+'/chats', chat);
+    return this.httpClient.post<Chat>(this.serverUrl+'/chats', chat);
   }
 
   postResource(route: string, item): Observable<any>{

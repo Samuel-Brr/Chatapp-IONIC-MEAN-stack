@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -7,10 +8,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class TabsService {
 
 private subject = new BehaviorSubject<boolean>(true);
-showTabs$: Observable<boolean> = this.subject.asObservable()
+showTabs$: Observable<boolean> = this.subject.asObservable();
 
 toggleTabs(){
-  this.subject.next(!this.subject.value)
+  this.subject.next(!this.subject.value);
 }
 
 }
