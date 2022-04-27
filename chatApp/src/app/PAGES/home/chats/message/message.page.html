@@ -21,7 +21,10 @@
 
 <ion-content>
 
-    <ion-item-sliding *ngFor="let message of chatData.messages; let i=index"
+  <ion-grid class="ion-no-padding" fixed>
+    <ion-row>
+      <ion-col sizeMd="6" offsetMd="3">
+        <ion-item-sliding *ngFor="let message of chatData.messages; let i=index"
     class="userMessage"
     [ngClass]="{'friendMessage': message.from !== user_id}"
     >
@@ -42,22 +45,35 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
 
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon slot="icon-only" name="happy-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-      <input class="messageInput" size="small" type="text" placeholder="Awesome Input" name="chat" [(ngModel)]="chat">
-    <ion-buttons slot="secondary">
-      <ion-button (click)="onPostMessage()">
-        <ion-icon slot="icon-only" name="send-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col sizeMd="6" offsetMd="3">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button>
+              <ion-icon slot="icon-only" name="happy-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+            <input class="messageInput" size="small" type="text" placeholder="Awesome Input" name="chat" [(ngModel)]="chat">
+          <ion-buttons slot="secondary">
+            <ion-button (click)="onPostMessage()">
+              <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
 </ion-footer>
