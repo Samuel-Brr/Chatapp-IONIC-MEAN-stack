@@ -16,10 +16,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.tabsStatus$ = this.tabsService.showTabs$;
-    console.log('status des tabs:', this.tabsStatus$);
-  }
-
-  segmentChanged(event: CustomEvent<SegmentChangeEventDetail>){
-    console.log(event.detail);
+    // console.log('status des tabs:', this.tabsStatus$);
   }
 }

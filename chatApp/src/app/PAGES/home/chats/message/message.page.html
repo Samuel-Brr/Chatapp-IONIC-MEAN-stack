@@ -29,7 +29,9 @@
     [ngClass]="{'friendMessage': message.from !== user_id}"
     >
       <ion-item-options side="start">
-        <ion-item-option (click)="onEditMessage(message._id)" color="primary" *ngIf="i === chatData.messages.length - 1 && message.from === user_id">
+        <ion-item-option (click)="onEditMessage(message._id)" color="primary"
+        *ngIf="i === chatData.messages.length - 1 && message.from === user_id"
+        >
           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
         </ion-item-option>
       </ion-item-options>

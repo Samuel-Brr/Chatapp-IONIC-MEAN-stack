@@ -16,7 +16,7 @@
              format: 'pem' // Most common formatting choice
          },
          privateKeyEncoding: {
-             type: 'pkcs1', // "Public Key Cryptography Standards 1"
+             type: 'pkcs1', // "private Key Cryptography Standards 1"
              format: 'pem' // Most common formatting choice
          }
      });
