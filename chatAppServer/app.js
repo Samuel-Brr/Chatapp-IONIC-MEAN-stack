@@ -38,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URI) //Connexion à la base de données
 
 const pusher = new Pusher({ //Parametrage du service pusher pour le rendu dynamiques des messages du chat
     appId: "1399436",
-    key: "cee542e476f0a7f6c638",
+    key: process.env.PUSHER_KEY,
     secret: "fc475b17b783db0dbee9",
     cluster: "eu",
     useTLS: true

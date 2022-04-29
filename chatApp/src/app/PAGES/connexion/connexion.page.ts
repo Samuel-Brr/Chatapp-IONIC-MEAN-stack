@@ -45,18 +45,20 @@ export class ConnexionPage implements OnInit {
               message: 'Connexion réussie 🥳',
               buttons: ['OK']
             })
-            .then((alert)=>alert.present());
+            .then((alert)=>{
+              alert.present();
+              // If the user authenticates successfully, we need to store the JWT returned in localStorage
+              this.authService.setLocalStorage(res);
 
-            // If the user authenticates successfully, we need to store the JWT returned in localStorage
-            this.authService.setLocalStorage(res);
+              if(res.user_id === '626682f4fa8b7172b8fe5eac'){
+                return this.router.navigate(['admin']);
+              }
 
-            if(res.user_id === '626682f4fa8b7172b8fe5eac'){
-              this.router.navigateByUrl('/admin');
-            }
-
-            this.router.navigateByUrl('/home/tabs/chats');
+              this.router.navigateByUrl('/home/tabs/chats');
+            });
           }
         }),
+
         catchError(err => throwError(() => {
             new Error(err);
             this.alertController.create({
