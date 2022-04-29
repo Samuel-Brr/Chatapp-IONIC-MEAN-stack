@@ -6,39 +6,47 @@
 
 <ion-content class="ion-padding">
 
-<form [formGroup]="registrationForm">
-  <ion-item>
-    <ion-label position="floating">Identifiant <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input formControlName="userName" type="text"></ion-input>
-  </ion-item>
-  <p *ngIf="f.userName.errors?.required && f.userName.touched" class="inputError">
-    Veuillez renseigner un Identifiant
-  </p>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col sizeMd="6" offsetMd="3" class="stylesColMd">
+        <form [formGroup]="registrationForm">
+          <ion-item>
+            <ion-label position="floating">Identifiant <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="userName" type="text"></ion-input>
+          </ion-item>
+          <p *ngIf="f.userName.errors?.required && f.userName.touched" class="inputError">
+            Veuillez renseigner un Identifiant
+          </p>
 
 
-  <ion-item>
-    <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input formControlName="mdp" type="password"></ion-input>
-  </ion-item>
-  <ng-container  *ngIf="f.mdp.errors | onlyOneError: ['minlength', 'required', 'passwordStrength']as error">
-    <div class="inputError" *ngIf="error?.required">Veuillez renseigner un mot de passe</div>
-    <div class="inputError" *ngIf="error?.minlength">Le mot de passe doit comporter au moins 8 caractères</div>
-    <div class="inputError" *ngIf="error?.passwordStrength">Le mot de passe doit comporter au moins 1Maj, 1Min, 1Chiffre</div>
-  </ng-container>
+          <ion-item>
+            <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="mdp" type="password"></ion-input>
+          </ion-item>
+          <ng-container  *ngIf="f.mdp.errors | onlyOneError: ['minlength', 'required', 'passwordStrength']as error">
+            <div class="inputError" *ngIf="error?.required">Veuillez renseigner un mot de passe</div>
+            <div class="inputError" *ngIf="error?.minlength">Le mot de passe doit comporter au moins 8 caractères</div>
+            <div class="inputError" *ngIf="error?.passwordStrength">Le mot de passe doit comporter au moins 1Maj, 1Min, 1Chiffre</div>
+          </ng-container>
 
 
-  <ion-item>
-    <ion-label position="floating">Confirmation mot de passe <ion-text color="danger">*</ion-text></ion-label>
-    <ion-input formControlName="confirmMdp" type="password"></ion-input>
-  </ion-item>
-  <div *ngIf="f.confirmMdp.touched && f.confirmMdp.invalid" class="alert alert-danger">
-    <div class="inputError" *ngIf="f.confirmMdp.errors.confirmedValidator">Les mots de passe doivent être identiques</div>
-  </div>
+          <ion-item>
+            <ion-label position="floating">Confirmation mot de passe <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="confirmMdp" type="password"></ion-input>
+          </ion-item>
+          <div *ngIf="f.confirmMdp.touched && f.confirmMdp.invalid" class="alert alert-danger">
+            <div class="inputError" *ngIf="f.confirmMdp.errors.confirmedValidator">Les mots de passe doivent être identiques</div>
+          </div>
 
 
-  <ion-button style="margin-top: 40px ;" expand="block" color="primary" (click)="onSubmit(registrationForm)" [disabled]="registrationForm.invalid">
-    Inscription
-  </ion-button>
-</form>
-<a routerLink="/connexion">Déja inscrit ? Connectez vous en cliquant ici</a>
+          <ion-button style="margin-top: 40px ;" expand="block" color="primary" (click)="onSubmit(registrationForm)" [disabled]="registrationForm.invalid">
+            Inscription
+          </ion-button>
+        </form>
+        <a routerLink="/connexion">Déja inscrit ? Connectez vous en cliquant ici</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 </ion-content>
