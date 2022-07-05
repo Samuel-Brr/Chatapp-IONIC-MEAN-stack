@@ -20,6 +20,17 @@ const Chat = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Message'
         }
+    ],
+    roles: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'userRole',
+            default: ObjectId('62c4497b3cd75eec1a011126')
+        },
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'adminRole'
+        }
     ]
 })
 

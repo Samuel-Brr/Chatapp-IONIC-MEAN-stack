@@ -10,4 +10,4 @@ const adminRole = new Schema({
     ]
 })
 
-module.exports = mongoose.model('userRole', adminRole)
+module.exports = mongoose.model('adminRole', adminRole)
