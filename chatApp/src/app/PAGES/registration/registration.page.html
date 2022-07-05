@@ -23,12 +23,15 @@
             <ion-label position="floating">Mot de passe <ion-text color="danger">*</ion-text></ion-label>
             <ion-input formControlName="mdp" type="password"></ion-input>
           </ion-item>
-          <ng-container  *ngIf="f.mdp.errors | onlyOneError: ['minlength', 'required', 'passwordStrength']as error">
-            <div class="inputError" *ngIf="error?.required">Veuillez renseigner un mot de passe</div>
-            <div class="inputError" *ngIf="error?.minlength">Le mot de passe doit comporter au moins 8 caractères</div>
-            <div class="inputError" *ngIf="error?.passwordStrength">Le mot de passe doit comporter au moins 1Maj, 1Min, 1Chiffre</div>
-          </ng-container>
+          <ng-container *ngIf="f.mdp.touched">
 
+            <ng-container  *ngIf="f.mdp.errors | onlyOneError: ['minlength', 'required', 'passwordStrength']as error">
+              <div class="inputError" *ngIf="error?.required">Veuillez renseigner un mot de passe</div>
+              <div class="inputError" *ngIf="error?.minlength">Le mot de passe doit comporter au moins 8 caractères</div>
+              <div class="inputError" *ngIf="error?.passwordStrength">Le mot de passe doit comporter au moins 1Maj, 1Min, 1Chiffre</div>
+            </ng-container>
+
+          </ng-container>
 
           <ion-item>
             <ion-label position="floating">Confirmation mot de passe <ion-text color="danger">*</ion-text></ion-label>
