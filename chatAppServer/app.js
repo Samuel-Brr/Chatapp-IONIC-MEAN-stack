@@ -12,6 +12,11 @@ const chatsRouter = require('./routes/chats.routes')
 const messagesRouter = require('./routes/message.routes')
 const adminRouter = require('./routes/admin.routes')
 
+const userRole = require('./models/userRole.model')
+const chat = require('./models/chat.model')
+const adminRole = require('./models/adminRole.model')
+
+
 require('dotenv').config()
 require('./config/passport')(passport)
 
@@ -44,6 +49,14 @@ const pusher = new Pusher({ //Parametrage du service pusher pour le rendu dynami
     useTLS: true
   });
 
+  // adminRole.create({
+  //   description: undefined,
+  //   users: []
+  // }).then(res => console.log('TOTOTO', res)).catch(err => console.log('C LA MERDE', err))
+
+  // userRole.findById("62c460f6a9adabb6d0525b64").then(obj => obj.populate('users').then(objet => console.log(objet)))
+  chat.findById("62c949d02ac74d8160c4ecbb").then(obj => obj.populate('roles').then(objet => console.log(objet)))
+  
 
 const db = mongoose.connection;
 db.once('open', () => {

@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const userRoleModel = require('./userRole.model')
+const userRoleId = userRoleModel.findById('62c460f6a9adabb6d0525b64').then(obj => {return obj._id})
+
 
 const Chat = new Schema({
     name: {
@@ -21,17 +24,18 @@ const Chat = new Schema({
             ref: 'Message'
         }
     ],
-    roles: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'userRole',
-            default: ObjectId('62c4497b3cd75eec1a011126')
-        },
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'adminRole'
-        }
-    ]
+    roles: {
+        user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'userRole',
+                default: '62c460f6a9adabb6d0525b64'    
+            },
+
+        admin: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'adminRole'
+            }
+    }
 })
 
 module.exports = mongoose.model('Chat', Chat);

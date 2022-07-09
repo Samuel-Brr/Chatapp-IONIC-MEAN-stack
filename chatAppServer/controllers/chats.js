@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 
 const Chat = require('../models/chat.model');
+const userRole = require('../models/userRole.model')
 
 
 const pathToKey = path.join(__dirname, '..', 'id_rsa_priv.pem');
@@ -45,7 +46,23 @@ exports.postInscription = (req,res,next)=>{
                 messages}
             )
             newChat.save()
-                .then((resObj) => res.status(201).send(resObj))
+                .then((resObj) => {
+
+                    // userRole.find().then(res => console.log('RES', res)).catch(err => console.log('TOTO', err))
+                    
+                    userRole.findById("62c460f6a9adabb6d0525b64")
+                        .then(userRoleInstance => {
+                            userRoleInstance.users.push(resObj._id) 
+                            userRoleInstance.save()
+                                .then(savedInstance => res.status(201).send(resObj))
+                                .catch(err =>{ 
+                                    console.log("impossible de sauvegarder l'instance de userRole", err)
+                                    res.status(500).send(err)})
+                        })
+                        .catch(err => {
+                            console.log("Imposible de trouver le user role", err)
+                            res.status(500).send(err)})                
+                })
                 .catch(err => {
                     console.log("Couldn't save the chat", err)
                     res.status(500).send(err)
