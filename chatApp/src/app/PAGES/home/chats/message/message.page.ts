@@ -89,7 +89,7 @@ export class MessagePage implements OnInit {
       this.user_id,
       Date.now().toString()
     );
-    this.subscription = this.api.postResource('/message', newMessage)
+    this.subscription = this.api.postResource('message', newMessage)
       .pipe(
         tap(res => {
           console.log('Réponse à l\'envoie du message:', res);

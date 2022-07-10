@@ -7,17 +7,17 @@ import { Chat } from '../MODELS/chat.model';
 @Injectable({providedIn: 'root'})
 export class ApiService {
 
-  serverUrl = 'http://localhost:3000';
+  serverUrl = 'https://my-very-first-chat-app.herokuapp.com/';
 
   constructor(private httpClient: HttpClient) { }
 
   getChats(): Observable<Chat[]>{
-    return this.httpClient.get(this.serverUrl+'/chats') as Observable<Chat[]> ;
+    return this.httpClient.get(this.serverUrl+'chats') as Observable<Chat[]> ;
   }
 
   postChats(chat: CreateChat): Observable<Chat>{
     // console.log('Objet utilisateur que j\'envoie au backend:', chat);
-    return this.httpClient.post<Chat>(this.serverUrl+'/chats', chat);
+    return this.httpClient.post<Chat>(this.serverUrl+'chats', chat);
   }
 
   postResource(route: string, item): Observable<any>{
@@ -25,11 +25,11 @@ export class ApiService {
   }
 
   deleteMessage(messageId){
-    return this.httpClient.delete(this.serverUrl + '/message', {body: messageId });
+    return this.httpClient.delete(this.serverUrl + 'message', {body: messageId });
   }
 
   updateMessage(reqBody){
-    return this.httpClient.put(this.serverUrl + '/message', {body: reqBody });
+    return this.httpClient.put(this.serverUrl + 'message', {body: reqBody });
   }
   //User methods
 
@@ -58,13 +58,13 @@ export class ApiService {
   }
 
   checkUserSession(){
-    return this.httpClient.get(this.serverUrl + '/chats/protected');
+    return this.httpClient.get(this.serverUrl + 'chats/protected');
   }
 
   //Test
 
   test(){
-    return this.httpClient.get(this.serverUrl + '/admin');
+    return this.httpClient.get(this.serverUrl + 'admin');
   }
 
 }

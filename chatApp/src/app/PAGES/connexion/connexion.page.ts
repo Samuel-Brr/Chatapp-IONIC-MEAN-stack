@@ -36,7 +36,7 @@ export class ConnexionPage implements OnInit {
       mdp: form.value.mdp
     };
 
-    this.subscription = this.api.postResource('/chats/connexion', authData)
+    this.subscription = this.api.postResource('chats/connexion', authData)
       .pipe(
         tap(res => {
           console.log('Réponse à la connexion:', res);
