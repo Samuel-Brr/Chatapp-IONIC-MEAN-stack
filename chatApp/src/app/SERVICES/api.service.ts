@@ -41,6 +41,10 @@ export class ApiService {
     return localStorage.getItem('user_id');
   }
 
+  isAdmin(){
+    return localStorage.getItem('adminRole');
+  }
+
   isRegistered(): boolean{
     return localStorage.getItem('user')? true : false;
   }

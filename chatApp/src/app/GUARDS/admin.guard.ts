@@ -16,11 +16,12 @@ export class AdminGuard implements CanLoad {
 
       return this.checkAdmin();
 
+
     }
 
 
     checkAdmin(){
-     if(this.api.getUser() === '626682f4fa8b7172b8fe5eac'){
+     if(this.api.isAdmin()){
        return true;
      }else {return this.router.navigate(['/registration']);}
    }

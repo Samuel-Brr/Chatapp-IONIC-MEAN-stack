@@ -32,6 +32,15 @@ setLocalStorage(responseObj) {
 
   localStorage.setItem('user_id', responseObj.body.user_id);
   localStorage.setItem('id_token', responseObj.body.accesToken);
+
+  if(responseObj.body.roles.admin){
+    localStorage.setItem('adminRole', responseObj.body.roles.admin);
+  }
+
+  if(responseObj.body.roles.admin){
+    localStorage.setItem('userRole', responseObj.body.roles.user);
+  }
+
   localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
 }
 

@@ -96,7 +96,13 @@ exports.postConnexion = (req,res,next) => {
                     if(doMatch){
 
                         const accesToken = issueJWT(user)
-                        return res.status(200).json({user_id: user._id, success: true, accesToken: accesToken.token, expiresIn: accesToken.expires})
+                        return res.status(200).json({
+                            user_id: user._id, 
+                            success: true, 
+                            accesToken: accesToken.token, 
+                            expiresIn: accesToken.expires, 
+                            roles: user.roles
+                        })
 
                     }
 

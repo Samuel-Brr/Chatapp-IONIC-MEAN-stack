@@ -1,8 +1,7 @@
-Définir le role par défault des chat dans le schema
+peaufiner le rbac
+page admin
+hebergement
+revoir le schema de ma bdd
+revoir la maquette
+finir les dossier administratifs
 
-populate un user pour voir si recois bien son role
-
-seo
-Ne pas oublier de peaufier le typage, surtout au niveau du service Api où l'on a des <any> un peu partout 
-error handling accross the app
-loading spinners lors des api calls nottement a la connexion

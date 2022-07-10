@@ -50,7 +50,7 @@ export class ConnexionPage implements OnInit {
               // If the user authenticates successfully, we need to store the JWT returned in localStorage
               this.authService.setLocalStorage(res);
 
-              if(res.user_id === '626682f4fa8b7172b8fe5eac'){
+              if(res.body.roles.admin){
                 return this.router.navigate(['admin']);
               }
 
