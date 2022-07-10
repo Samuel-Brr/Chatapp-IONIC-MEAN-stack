@@ -1,4 +1,3 @@
-peaufiner le rbac
 page admin
 hebergement
 revoir le schema de ma bdd
