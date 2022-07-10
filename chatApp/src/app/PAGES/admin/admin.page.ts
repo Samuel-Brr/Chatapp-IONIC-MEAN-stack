@@ -11,8 +11,8 @@ import { ApiService } from 'src/app/SERVICES/api.service';
 })
 export class AdminPage implements OnInit {
 
-  private subject = new BehaviorSubject<any[]>([]);
-  chatArr$: Observable<any[]> = this.subject.asObservable();
+  private subject = new BehaviorSubject<Chat[]>([]);
+  chatArr$: Observable<Chat[]> = this.subject.asObservable();
 
   constructor(private api: ApiService) { }
 

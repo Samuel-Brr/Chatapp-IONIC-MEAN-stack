@@ -1,4 +1,5 @@
 import { Message } from './message.model';
+import { Troles } from './roles.model';
 
 export class Chat {
   constructor(
@@ -7,5 +8,6 @@ export class Chat {
     public mdp: string,
     public image: string,
     public messages: Message[],
+    public roles: Partial<Troles>
   ){}
 }
