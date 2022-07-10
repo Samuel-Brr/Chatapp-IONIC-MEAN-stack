@@ -1,4 +1,3 @@
-revoir model
 hebergement
 revoir le schema de ma bdd
 revoir la maquette

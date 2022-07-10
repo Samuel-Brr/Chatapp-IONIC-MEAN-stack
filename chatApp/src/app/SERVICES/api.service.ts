@@ -11,8 +11,8 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getChats(): Observable<any>{
-    return this.httpClient.get(this.serverUrl+'/chats');
+  getChats(): Observable<Chat[]>{
+    return this.httpClient.get(this.serverUrl+'/chats') as Observable<Chat[]> ;
   }
 
   postChats(chat: CreateChat): Observable<Chat>{
